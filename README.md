@@ -7,31 +7,45 @@ A calculator written in Ruby using the Shoes graphical API
 
 We'll get a copy of Shoes running.
 
-* First you'll need to install JRuby. JRuby is Ruby syntax using an interpreter
-written in Java, instead of C, which is the language normally used. This allows
-shoes to use graphics libraries that are easier to install and work with than
-the C-based alternatives.
+* First you'll need to install Shoes. You can grab a pre-packaged version that contains a ruby runtime, graphical libraries and the shoes code at the shoes download site:
 
-To begin with, install JRuby as per the instructions http://jruby.org/getting-started
+http://shoesrb.com/downloads/
 
-> rvm install jruby
+* If using a mac, drag the application to your /Applications directory.
+* If using linux, execute the install script, giving yourself execute permissions if necessary (chmod)
 
-If you see an error relating to C extensions, I had to set the following variable
-in bash:
+* You ought to be able to get the welcome screen, with links to the shoes manual. If that doesn't work, you may need to install some other dependencies for your system, or build from source. We'll be able to help with this.
 
-> export JRUBY_OPTS=-Xcext.enabled=true
+* If all else fails, we could try the JRuby version on another branch of this repo
 
-* And then the shoes4 gem. Resources online at: https://github.com/shoes/shoes4.
-Make sure that you are using JRuby before you install the gem
+* You need to setup the PATH to your shoes installation, by editing your ~/.bash_profile file, which contains environment variables for your terminal session (might be ~/.bashrc for some linux systems). This allows you to run the `shoes` command from the command line.
 
-> rvm use jruby
-> gem install shoes --pre
+E.g. I put
+```
+# Shoes install
+export PATH=$PATH:/Applications/Shoes.app/Contents/MacOS/shoes
+```
+
+But if you compiled from source, it could be
+
+```
+# Shoes install
+export PATH=$PATH:/your/path/to/shoes/dist/shoes
+```
+
+* Test that shoes is working by running it from the command line
+
+> shoes
+
+# DOWNLOAD
 
 * Fork your own copy of this exercise and clone it
 
 * Run shoes with the following command, from the directory you just cloned into
 
 > shoes calculator.rb
+
+You should see a basic calculator appear.
 
 # TODO
 
@@ -41,7 +55,7 @@ to your GitHub account.
 
 1. Experiment with the user interface, changing colours, layouts,
 backgrounds and gradients (don't spend all day on this though)
-2. Fix the layout so that the numbers run from 0-9 in rows, e.g 7-8-9
+2. Fix the layout so that the numbers run from 0-9 in rows, e.g 7-8-9. Remember KISS: Keep it simple, stupid!
 3. Implement a cancel entry (C) button that clears the input
 4. Implement other scientific calculator functions:
   * power of two
