@@ -23,7 +23,7 @@ http://shoesrb.com/downloads/
 E.g. I put
 ```
 # Shoes install
-export PATH=$PATH:/Applications/Shoes.app/Contents/MacOS/shoes
+export PATH=$PATH:/Applications/Shoes.app/Contents/MacOS/
 ```
 
 But if you compiled from source, it could be
@@ -79,3 +79,4 @@ the following features:
 # Submission
 
 Once you're done, submit a pull request so that I can review your work.
+
