@@ -12,6 +12,11 @@ Shoes.app :title => "My Amazing Calculator", :width => 240, :height => 300, :res
         end
       end
 
+      button "C" do
+        @input = ""
+        eval_expression
+      end
+
       button "=" do
         eval_expression
       end
