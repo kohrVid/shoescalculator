@@ -17,6 +17,11 @@ Shoes.app :title => "My Amazing Calculator", :width => 240, :height => 300, :res
         eval_expression
       end
 
+      button "sqrt" do
+        @input = Math::sqrt(@input.to_i).to_s
+        eval_expression
+      end
+
       button "=" do
         eval_expression
       end
