@@ -17,6 +17,10 @@ Shoes.app :title => "My Amazing Calculator", :width => 240, :height => 300, :res
         eval_expression
       end
 
+      button "\u00f7".encode('utf-8') do
+        append "/"
+      end
+
       button "sqrt" do
         @input = Math::sqrt(@input.to_i).to_s
         eval_expression
@@ -44,11 +48,37 @@ Shoes.app :title => "My Amazing Calculator", :width => 240, :height => 300, :res
     @output.text = @input
   end
 
+  def divide
+    characters = @input.split ""
+
+    first_number = ""
+    second_number = ""
+
+    second = false
+
+    characters.each do |char|
+      if char == "/"
+        second = true
+        next
+      elsif second == false
+        first_number << char
+      else
+        second_number << char
+      end
+    end
+
+    return first_number.to_f / second_number.to_f
+  end
+
   # Evaluate the input we've got so far
   #
   def eval_expression
-    @input = eval(@input).to_s
-    @output.text = @input
+    if @input.include?("/")
+      @output.text = divide
+    else
+      @input = eval(@input).to_s
+      @output.text = @input
+    end
   end
 
 end
