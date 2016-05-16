@@ -1,5 +1,5 @@
 Shoes.app :title => "My Amazing Calculator", :width => 240, :height => 300, :resizable => false do
-  background "#0000aa", :curve => 8, :margin => 15
+  background "#0000aa", :curve => 8, :margin => 15, :height => 280
 
   stack :margin => 40 do
     @output = edit_line :width => 160
