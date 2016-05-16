@@ -5,7 +5,8 @@ Shoes.app :title => "My Amazing Calculator", :width => 240, :height => 300, :res
     @output = edit_line :width => 160
 
     flow do
-      %w(0 1 2 3 4 5 6 7 8 9 + / * -).each do |op|
+      %w(1 2 3 + 4 5 6 - 7 8 9 * . 0 **).each do |op|
+        # Character button?
         button op do
           append op
         end
