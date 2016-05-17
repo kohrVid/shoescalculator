@@ -1,1 +1,0 @@
-debug(“acc: #@accumulator}, last: #{@last_operator}, inp: #
