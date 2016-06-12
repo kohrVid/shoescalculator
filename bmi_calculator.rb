@@ -1,29 +1,27 @@
-Shoes.app :title => "My Amazing BMI Calculator", :width => 240, :height => 300, :resizable => false do
-  background "#fff", :curve => 80, :margin => 10
+Shoes.app title: "My Amazing BMI Calculator", width: 240, height: 300, resizable: false do
+  background "#fff", curve: 80, margin: 10
 
-  stack :margin => 40 do
-    subtitle "    BMI"
-    para "       height (m)"
-    para "\n       weight (kg)"
+  stack margin: 40 do
+    subtitle "BMI", align: "center"
+    para "height (m)", align: "center"
+    @input_height = edit_line width: 120, align: "center"
+    para "weight (kg)", align: "center", top:  150
+    @input_weight = edit_line width: 120, align: "center"
 
     @output = para
 
-    @input_height = edit_line :width => 120
-    @input_weight = edit_line :width => 120
     @input_height.move(20, 80)
     @input_weight.move(20, 137)
 
-    @output.move(25, 253)
+    @output.move(37, 240)
 
     @height = true
 
-    flow :margin => 40 do
-      button "Calculate BMI", :width => "155%" do
+    flow do
+      button "Calculate BMI", width: "65%", bottom: 15, left: 25  do
         eval_expression
       end
-
     end
-
   end
 
 
@@ -34,5 +32,4 @@ Shoes.app :title => "My Amazing BMI Calculator", :width => 240, :height => 300, 
   def eval_expression
     @output.text = calc_bmi.to_s
   end
-
 end
