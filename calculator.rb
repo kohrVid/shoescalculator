@@ -1,41 +1,90 @@
+require "mathn"
 Shoes.app :title => "My Amazing Calculator", :width => 240, :height => 300, :resizable => false do
-  background "#0000aa", :curve => 8, :margin => 15, :height => 280
-
+  background "#000"..."#00a", :curve => 8, :margin => 15, :height => 280
+  
   stack :margin => 40 do
-    @output = edit_line :width => 160
+    @output = edit_line :width => 160, margin: [0, 0, 0, 10]
 
     flow do
-      %w(1 2 3 + 4 5 6 - 7 8 9 * . 0 **).each do |op|
-        # Character button?
-        button op do
-          append op
-        end
+      %w(7 8 9).each do |op|
+	stack width: 0.25 do
+	  button op do
+	    append op
+	  end
+	end
       end
-
-      button "C" do
-        @input = ""
-        eval_expression
+      stack width: 0.25 do
+	button "C" do
+	  @input = ""
+	  eval_expression
+	end
       end
-
-      button "\u00f7".encode('utf-8') do
-        append "/"
+    end
+    
+    flow do
+      %w(4 5 6).each do |op|
+	stack width: 0.25 do
+	  button op do
+	    append op
+	  end
+	end
       end
-
-      button "sqrt" do
-        @input = Math::sqrt(@input.to_i).to_s
-        eval_expression
+      stack width: 0.25 do
+	button "\u00f7".encode("utf-8"), width: 1.0 do
+	  append "/"
+	end
       end
-
-      button "log" do
-        @input = Math::log(@input.to_i, 2).to_s
-        eval_expression
+    end
+    
+    flow do
+      %w(1 2 3).each do |op|
+	stack width: 0.25 do
+	  button op do
+	    append op
+	  end
+	end
       end
-
-      button "=" do
-        eval_expression
+      stack width: 0.25 do
+	button "\u00d7".encode("utf-8"), width: 1.0 do
+	  append "*"
+	end
+      end
+    end
+    
+    flow do
+      %w(. 0 + -).each do |op|
+	stack width: 0.25 do
+	  button op do
+	    append op
+	  end
+	end
       end
     end
 
+    flow do
+      stack width: 0.25 do
+	button "log#{"\u2082".encode("utf-8")}x", width: 1.0 do
+	  @input = Math::log(@input.to_f, 2).to_s
+	  eval_expression
+	end
+      end
+      stack width: 0.25 do
+	button "x\u207f".encode("utf-8"), width: 1.0 do
+	  append "**"
+	end
+      end
+      stack width: 0.25 do
+	button "\u221A".encode('utf-8'), width: 1.0 do
+	  @input = Math::sqrt(@input.to_f).to_s
+	  eval_expression
+	end
+      end
+      stack width: 0.25 do
+	button "=" do
+	  eval_expression
+	end
+      end
+    end
   end
 
   # Stick a string on the end of our input
@@ -48,37 +97,14 @@ Shoes.app :title => "My Amazing Calculator", :width => 240, :height => 300, :res
     @output.text = @input
   end
 
-  def divide
-    characters = @input.split ""
-
-    first_number = ""
-    second_number = ""
-
-    second = false
-
-    characters.each do |char|
-      if char == "/"
-        second = true
-        next
-      elsif second == false
-        first_number << char
-      else
-        second_number << char
-      end
-    end
-
-    return first_number.to_f / second_number.to_f
-  end
-
   # Evaluate the input we've got so far
   #
   def eval_expression
-    if @input.include?("/")
-      @output.text = divide
-    else
+    if @input.to_i.zero?
       @input = eval(@input).to_s
-      @output.text = @input
+    else
+      @input = eval(@input).to_f.to_s
     end
+    @output.text = @input
   end
-
 end
